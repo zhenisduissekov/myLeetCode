@@ -6,17 +6,15 @@
  * }
  */
 func detectCycle(head *ListNode) *ListNode {
-    p := head
     m := make(map[*ListNode]struct{})
 
-    for p !=nil && p.Next != nil {
-        if _, exists := m[p]; exists {
-            return p
+    for head !=nil && head.Next != nil {
+        if _, exists := m[head]; exists {
+            return head
         }
-        m[p] = struct{}{}
-        p = p.Next
+        m[head] = struct{}{}
+        head = head.Next
     }
-    
     
     return nil
 }
