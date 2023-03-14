@@ -18,3 +18,25 @@ func twoSum(numbers []int, target int) []int {
     }
     return []int{}
 }
+
+
+// second solution from needcode
+
+func twoSum(numbers []int, target int) []int {
+    i := 0
+    j := len(numbers)-1
+
+    for i < j {
+        res := numbers[i] + numbers [j]
+        switch {
+            case target == res:
+                return []int{i+1, j+1}
+            case target > res:
+                i++
+            case target < res:
+                j--        
+        }
+
+    }
+    return []int{}
+}
