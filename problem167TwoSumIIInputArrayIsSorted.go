@@ -1,19 +1,18 @@
 func twoSum(numbers []int, target int) []int {
-    s := numbers
     m := map[int]int{}
-    for j:=1;j<len(s);j++ {
-        if target - s[0] < s[j] {
+    for j:=1;j<len(numbers);j++ {
+        if target - numbers[0] < numbers[j] {
             break
         }
-        if target - s[0] == s[j] {
+        if target - numbers[0] == numbers[j] {
             return []int{1, j+1}
         }
 
-        m[target-s[j]] = j
+        m[target-numbers[j]] = j
     }
 
-    for k:=1;k<len(s)-1;k++ {
-        if val, exists := m[s[k]]; exists {
+    for k:=1;k<len(numbers)-1;k++ {
+        if val, exists := m[numbers[k]]; exists {
             return []int{k+1,val+1}
         }
     }
