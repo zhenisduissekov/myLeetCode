@@ -5,22 +5,30 @@
  *     Next *ListNode
  * }
  */
-func hasCycle(head *ListNode) bool {
-    m := make(map[int]struct{})
-    if head == nil {
-        return false
-    }
-    p := head
-    for {
-        if _, exists := m[p.Val]; exists {
+
+func hasCycle(head *ListNode) bool {    
+    m := make(map[*ListNode]struct{})
+
+    for head != nil && head.Next != nil {
+        if _, exists := m[head.Next]; exists {
             return true
-        }    
-        m[p.Val] = struct{}{}
-        if p.Next == nil {
-            break
         }
-        p = p.Next
+
+        m[head.Next] = struct{}{}
+        head = head.Next
     }
-    
+
+    return false
+}
+
+
+func hasCycle(head *ListNode) bool {
+    fast, slow := head, head
+    for fast != nil && fast.Next != nil {
+        fast, slow = fast.Next.Next, slow.Next
+        if fast == slow {
+            return true
+        }
+    }
     return false
 }
