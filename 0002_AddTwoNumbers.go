@@ -28,3 +28,38 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
     }
     return head.Next
 }
+
+
+or
+
+**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+    head := addNode(l1, l2, 0)
+    return head
+}
+
+func addNode(l1, l2 *ListNode, keep int) *ListNode {
+    p := &ListNode{}
+    switch {
+        case l1 == nil && l2 == nil && keep == 1:
+            p.Val = 1
+        case l1 == nil && l2 == nil && keep == 0:
+            p = nil
+        case l1 != nil && l2 != nil:
+            p.Val = (l1.Val + l2.Val + keep) % 10
+            p.Next = addNode(l1.Next, l2.Next, (l1.Val + l2.Val + keep)/10)
+        case l1 != nil && l2 == nil:
+            p.Val = (l1.Val + keep) % 10
+            p.Next = addNode(l1.Next, nil, (l1.Val + keep)/10)
+        case l1 == nil && l2 != nil:
+            p.Val = (l2.Val + keep) % 10
+            p.Next = addNode(nil, l2.Next, (l2.Val + keep)/10)
+    }
+    return p
+}
