@@ -37,3 +37,37 @@ func contains(res [][]int, temp []int) bool {
 	}
 	return false
 }
+
+
+
+// v2 покомпактнее
+
+func threeSum(nums []int) [][]int {
+    result := make([][]int,0)
+    sort.Slice(nums, func(i, j int) bool {
+        return nums[i]<nums[j]
+    })
+    seen := make(map[string]bool)
+    for i:=0;i<len(nums);i++ {
+        j :=i+1
+        k := len(nums)-1
+        for j<k {
+            switch {
+            case nums[i]+nums[j]+nums[k] == 0:
+                key := fmt.Sprintf("%d%d%d",nums[i],nums[j],nums[k])
+                if !seen[key] {
+                    temp := []int{nums[i], nums[j], nums[k]}
+                    result = append(result, temp)
+                    seen[key]=true
+                }
+                j++
+            case nums[i]+nums[j]+nums[k] < 0:
+                j++
+            default:
+                k--
+            }
+        }
+        
+    }
+    return result
+}
